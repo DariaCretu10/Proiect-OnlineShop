@@ -1,0 +1,186 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #FFD556;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.welcome {
+    font-family: 'Anton', cursive;
+    text-align: center;
+}
+
+/* toata bara de sus */
+.navbar {
+    text-align: center;
+    background-color: #A1A09C;
+    border: none;
+    box-shadow: 0 6px 12px #A09D94;
+}
+
+/* scrisul elementelor ce compun bara de sus */
+.navbar a {
+    color: #FFFBF3;
+}
+
+/* scrisul elementelelor ce compun bara de sus, CAND AVEM MOUSE UL PE ELE*/
+.navbar a:hover {
+    color: #A39C8D;
+    background-color: #FFFBF3;
+}
+
+.navbar li:hover {
+    background-color: #FFFBF3;
+}
+
+/* patratelul logo ului de sus */
+.logo-font {
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+}
+
+.footer-position {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    background: #fff;
+    box-shadow: 0 6px 18px #ccc;
+}
+
+.navbar lista:hover {
+    color: #e17055;
+}
+
+.utilizatori {
+    margin-left: 430px;
+}
+
+/* iconita cu cosul de cumparaturi*/
+.cos {
+    /*overflow: auto;*/
+    font-size: 15px;
+    padding: 10px 10px 10px 10px !important;
+}
+
+.Table {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin: 8px;
+}
+
+.Total {
+    padding: 8px;
+    margin: 5px;
+}
+
+.Tabel tr:nth-child(even) {
+    background-color: #fdcb6e;
+}
+
+.Tabel tr:hover {
+    background-color: #ffeaa7;
+}
+
+.sterge {
+    border-radius: 4px;
+    color: white;
+    background-color: #ff4d4d;
+    border: none;
+    margin-left: 5px;
+}
+
+.fundal {
+    background-color: #FFDE7C;
+}
+
+.row h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: 'Courgette', cursive;
+}
+
+.categ {
+    background-color: #393939;
+    color: white;
+    padding: 9px;
+    border-radius: 4px;
+    border: none;
+}
+
+    .categ:hover {
+        color: #393939;
+        background-color: white;
+    }
+
+.stergeCateg {
+    background-color: #d63031;
+    padding: 9px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+    .stergeCateg:hover {
+        color: #ff7675;
+    }
+
+.afisCateg {
+    background-color: #ff7675;
+    padding: 9px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+    .afisCateg:hover {
+        color: #d63031;
+    }
+
+.categ2 {
+    background-color: #393939;
+    color: white;
+    padding: 9px;
+    border-radius: 4px;
+    border: none;
+}
+
+    .categ2:hover {
+        color: #393939;
+        background-color: white;
+    }
+
+.fara {
+    background-color: #FFD556;
+}
+
+.bara {
+    border-color: #ff7979;
+    background-color: #FFD556;
+}

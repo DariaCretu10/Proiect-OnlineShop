@@ -1,0 +1,31 @@
+﻿@model FinalProiect.Models.Order
+
+@{
+    ViewBag.Title = "AdressAndPayment";
+}
+
+
+@using (Html.BeginForm())
+{
+
+    <h2>Adresa si plată</h2>
+    <fieldset>
+        <legend>Informații legate de livrare</legend>
+        @Html.EditorForModel()
+    </fieldset>
+    <fieldset>
+        <legend>Payment</legend>
+        <p>
+            Metodă de plată : RAMBURS;
+        </p>
+        <div class="editor-label">
+            @Html.Label("Promo Code")
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("PromoCode")
+        </div>
+    </fieldset>
+
+    <input type="submit" value="Submit Order" />
+}
+

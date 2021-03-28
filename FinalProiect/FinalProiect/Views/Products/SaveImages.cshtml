@@ -1,0 +1,9 @@
+﻿@using (Html.BeginForm("SaveImages", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h3>Incarcati o imagine pentru noul produs</h3>
+    <input  type="file" name="file" value="Browse" />
+    <br />
+    <input class="sterge" type="submit" value="Upload" />
+
+}
+

@@ -1,0 +1,108 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Produse";
+}
+
+<h2>Produse</h2>
+
+<!-- sagetile -->
+<div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- sageata ce duce la prima pagina -->
+            <li>
+                <a href="/Products/Index?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <!-- numarul de pagini -->
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li><a href="/Products/Index?page=@(i)&search=@(ViewBag.SearchString)&OrderBy=@(ViewBag.OrderBy)">@(i)</a></li>
+            }
+
+            <!-- sageata ce duce la ultima pagina -->
+            <li>
+                <a href="/Products/Index?page=@(ViewBag.lastPage)&search=@(ViewBag.SearchString)&OrderBy=@(ViewBag.OrderBy)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- motorul de cautare -->
+<div class="container">
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" method="GET">
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                    <!-- bara de cautare -->
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control form-control-lg form-controlborderless pull-left bara" type="text" name="search"
+                               value="@ViewBag.SearchString"
+                               placeholder="Cautare..">
+                        <button class="glyphicon glyphicon-search col-xs-pull-5 " style="font-size: 25px; border:none; background-color:#FFD556;"
+                                type="submit"></button>
+                    </div>
+                    <br /><br />
+                    <!-- lupa, butonul de search -->
+                    <!--end of col-->
+                    <!-- drop down list -->
+                    <div>
+                        <div class="form-group">
+
+                            @Html.Label("OrderBy", "Sort by")
+                            @Html.DropDownList("OrderBy", new List<SelectListItem>
+
+                             {
+                                new SelectListItem{ Text="Preț crescator", Value = "1" },
+                                new SelectListItem{ Text="Preț descrescator", Value = "2" },
+                                new SelectListItem{ Text="A-Z", Value = "3" },
+                                new SelectListItem{ Text="Z-A", Value = "4" },
+                                new SelectListItem{ Text="Rating", Value = "5" }
+                             }, "-- Order By --", new { @class = "form-control" })
+
+                            <input type="submit" class="btn btn-default categ" value="Filter" />
+                        </div>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </form>
+        </div>
+        <!--end of col-->
+    </div>
+</div>
+
+<br />
+
+<!-- afisarea produselor -->
+@foreach (var product in ViewBag.Products)
+{
+    if (product.Accept == true)
+
+    { <div class="col-md-4">
+            <div class="card-default" style="width: 32rem; background-color:rgba(128, 128, 128, 0.2); padding:35px; margin-bottom:20px;">
+                <img class="card-default-img-top" src="/Content/UploadedImages/@product.ImageName" alt="Card image cap" width="240">
+                <div class="card-default-body">
+                    <h3 class="card-default-title">@product.Nume</h3>
+                    <p class="card-default-text"> <strong>Pret : </strong>@product.Pret</p>
+                    <p class="card-default-text">@product.Descriere</p>
+                    <p class="card-default-text"> <p class="glyphicon glyphicon-tag"></p> @product.Category.CategoryName</p>
+                    <a href="/Products/Show/@product.ProductId" class="btn btn-primary pull-right" style="padding:4px;">Afisare produs</a>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+

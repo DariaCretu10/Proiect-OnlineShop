@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- modificat nume site -->
+    <title>@ViewBag.Title - Bazar</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<!-- bara de sus care este in fiecare pagina a siteului -->
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <!-- logo ul care la click duce la bagina principala -->
+            <div class="navbar-header">
+                <!-- CRED CA POATE DISPAREA
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                -->
+                @Html.ActionLink("Bazar", "Index", "", new { area = "" }, new { @class = "navbar-brand logo-font" })
+            </div>
+            <!-- celelalte butoane care fac legatura in site -->
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("Produse", "Index", "Products")</li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="lista">@Html.ActionLink("Categorii", "Index", "Categories")</li>
+                        <li class="lista">@Html.ActionLink("Categorie nouă", "New", "Categories")</li>
+                        <li class="lista">@Html.ActionLink("Utilizatori", "Index", "Users")</li>
+                        <li>@Html.ActionLink("În aștepare", "Waiting", "Products")</li>
+                    }
+
+                    @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Produs nou", "SaveImages", "Products")</li>
+                    }
+
+                </ul>
+
+                <div style="position: relative; float: right">
+                    <!-- Iconita pentru Cosul de cumaraturi -->
+                    <a class="button glyphicon glyphicon-shopping-cart cos" href="/ShoppingCart/Index/">
+                        <p style="position: relative; margin-bottom: 0px;">Cumparaturile</p>
+                    </a>
+
+                    <!--sectiunea de logare-->
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Views - Home - Index -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+        <!-- in josul paginii -->
+        <footer class="footer-position" style="background-color: #443300; color: #FFE38F;">
+            <p style="color: #FFE38F">
+                &copy; @DateTime.Now.Year -
+                <span class="logo-font" style="font-size: 16px;">
+                    Bazar => 
+                </span>
+                <a href="/Home/About/" style="color:#FFE38F;">
+                    Despre noi;
+                </a>
+                <a href="/Home/Contact/" style="color:#FFE38F;">
+                    Contact
+                </a>
+            </p>
+            
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

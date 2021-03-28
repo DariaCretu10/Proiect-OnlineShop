@@ -1,0 +1,119 @@
+﻿@model Incercare2Proiect.Models.Product
+@{
+    ViewBag.Title = Model.Nume;
+}
+<br />
+<a class="btn btn-default" href="/Products/Index">Inapoi la produse</a>
+<br />
+
+<br />
+<div class="panel panel-default" style="background-color:#fdcb6e; text-align:center;">
+    <div class="panel-heading">@Model.Nume</div>
+    <img class="card-img-top" src="/Content/UploadedImages/@Model.ImageName" alt="Card image cap" width="240" height="300">
+    <div class="panel-body">
+        Pret: <strong>@Model.Pret</strong>
+        <br /><br />
+        <span class="label label-success">@Model.Descriere</span>
+        <br /><br />
+        <strong> Rating produs : @Model.Medie / 5</strong> <p class="glyphicon glyphicon-star-empty"></p>
+        <br/> <br/>
+        <i class="glyphicon glyphicon-tag"></i> @Model.Category.CategoryName
+        <br />
+        <hr>
+
+        @foreach (var rev in Model.Reviews)
+        {
+
+
+        }
+        @if (ViewBag.afisareButoane == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+        {
+
+            <a class="btn btn-primary pull-left" href="/Products/Edit/@Model.ProductId">Modifica produs</a>
+            <form method="post" action="/Products/Delete/@Model.ProductId">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-danger pull-right" type="submit">Sterge produs</button>
+            </form>
+
+            <div class="clearfix"></div>
+        }
+        <br />
+        <div class="btn btn-success">
+            <p class="button glyphicon glyphicon-shopping-cart">
+                @Html.ActionLink("Adaugă în coș", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, "")
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<br />
+@foreach (var rev in Model.Reviews)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div>
+                    <p>@rev.Continut</p>
+                    <p> <p class="glyphicon glyphicon-star-empty"></p> @rev.Nota / 5 </p>
+                    <small class="pull-right">@rev.Date</small>
+                    <i class="glyphicon glyphicon-user"></i> <i>scris de</i> <strong> @rev.User.UserName </strong>
+
+                </div>
+                @if (rev.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+                {
+                    <div style="display: inline-block; float : left; margin-right: 15px">
+                        <a class="glyphicon glyphicon-pencil" href="/Reviews/Edit/@rev.ReviewId"></a>
+                    </div>
+                    <div style="display: inline-block; float : left">
+                        <form method="post" action="/Reviews/Delete/@rev.ReviewId">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button class="glyphicon glyphicon-trash" style="border: none; background: transparent" type="submit"></button>
+                        </form>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <hr />
+}
+
+@if (ViewBag.rol == true)
+{
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <div class="panel">
+                    <form method="post" action="/Products/Show/@Model.ProductId">
+                        <div class="panel-body" style="background-color:#fdcb6e;">
+                            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                            <label>Continut review</label>
+                            <br />
+                            <div class="pull-right">
+                                <select class="form-control" id="Nota" name="Nota">
+                                    <option>Selectare nota </option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <textarea class="form-control" name="Continut"></textarea>
+                            <br />
+                            <button class="btn btn-success " type="submit">Adauga review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+}

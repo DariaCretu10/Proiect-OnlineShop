@@ -1,0 +1,89 @@
+﻿
+@model FinalProiect.ViewModels.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script>
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>
+<h3>
+    <em>Detalii</em> comandă:
+</h3>
+<p class="button">
+    @Html.ActionLink("Checkout >>", "AdressAndPayment", "Checkout")
+</p>
+<div id="update-message">
+</div>
+<table class="Tabel">
+    <tr>
+        <th class="Table">
+            Nume produs
+        </th>
+
+        <th class="Table">
+            Pret
+        </th>
+        <th class="Table">
+            Cantitate
+        </th>
+        <th class="fara"></th>
+    </tr>
+    @foreach (var item in
+Model.CartItems)
+    {
+        <tr id="row-@item.RecordId">
+            <td class="Table">
+                @Html.ActionLink(item.Product.Nume,
+"Index", "Products", new { id = item.ProductId }, null)
+            </td>
+            <td class="Table">
+                @item.Product.Pret lei
+            </td>
+            <td id="item-count-@item.RecordId" class="Table">
+                @item.Count buc
+            </td>
+            <td class="fara">
+                <form method="post" action="/ShoppingCart/RemoveFromCart/@item.RecordId">
+
+                    <button type="submit" class="remove sterge">Șterge din coș</button>
+
+                </form>
+            </td>
+        </tr>
+    }
+    <tr >
+        <td class="Total">
+            Total :
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total" class="Total fara">
+            @Model.CartTotal lei
+        </td>
+    </tr>
+</table>
+

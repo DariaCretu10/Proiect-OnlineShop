@@ -1,0 +1,13 @@
+﻿@model Incercare2Proiect.Models.Review
+
+<h2>Editare review</h2>
+
+    <form method="post" action="/Reviews/Edit/@Model.ReviewId">
+        @Html.HttpMethodOverride(HttpVerbs.Put)
+        <label>Continut review</label>
+        <br />
+        <textarea name="Continut">@Model.Continut</textarea>
+        <br />
+        <button class="btn btn-success" type="submit">Editeaza review</button>
+    </form>
+
